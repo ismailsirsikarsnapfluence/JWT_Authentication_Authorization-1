@@ -1,6 +1,7 @@
 ﻿using JWT_Authentication_Authorization.Context;
 using JWT_Authentication_Authorization.Interfaces;
 using JWT_Authentication_Authorization.Models;
+using JWT_Authentication_Authorization.Models.Response;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -58,7 +59,7 @@ namespace JWT_Authentication_Authorization.Services
 
         }
 
-        public string Login(LoginRequest loginRequest)
+        public LoginResponse Login(LoginRequest loginRequest)
         {
             if (loginRequest.Username != null && loginRequest.Password != null)
             {
@@ -87,18 +88,25 @@ namespace JWT_Authentication_Authorization.Services
                         signingCredentials: signIn);
 
                     var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
-                    return jwtToken;
-                }
-                else
-                {
-                    throw new Exception("user is not valid");
-                }
+                    user.Password = "";
+                    LoginResponse result = new LoginResponse
+                    {
+                        User = user,
+                        Token = jwtToken,
+                        isSucesss = true
+                };
+
             }
             else
             {
-                throw new Exception("credentials are not valid");
+                throw new Exception("user is not valid");
             }
         }
+            else
+            {
+                throw new Exception("credentials are not valid");
+    }
+}
     }
 }
       

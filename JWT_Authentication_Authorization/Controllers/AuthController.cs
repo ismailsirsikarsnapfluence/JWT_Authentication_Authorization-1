@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JWT_Authentication_Authorization.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("Account")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -16,10 +16,10 @@ namespace JWT_Authentication_Authorization.Controllers
             _auth = auth;
         }
         [HttpPost("login")]
-        public string Login([FromBody] LoginRequest obj)
+        public IActionResult Login([FromBody] LoginRequest request)
         {
-            var token = _auth.Login(obj);
-            return token;
+            var result = _auth.Login(request);
+            return Ok(result);
         }
 
         [HttpPost("assignRole")]

@@ -8,7 +8,7 @@ using System.Data;
 
 namespace JWT_Authentication_Authorization.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("Employee")]
     [ApiController]
 
     public class EmployeesController : ControllerBase
