@@ -94,19 +94,25 @@ namespace JWT_Authentication_Authorization.Services
                         User = user,
                         Token = jwtToken,
                         isSucesss = true
-                };
-
+                    };
+                    return result;
+                }
+                else
+                {
+                    throw new Exception("user is not valid");
+                }
             }
-            else
-            {
-                throw new Exception("user is not valid");
-            }
-        }
             else
             {
                 throw new Exception("credentials are not valid");
-    }
-}
+            }
+            
+        }        
+
+        LoginResponse IAuthService.Login(LoginRequest loginRequest)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
       
