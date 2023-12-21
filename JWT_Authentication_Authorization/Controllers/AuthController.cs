@@ -19,7 +19,14 @@ namespace JWT_Authentication_Authorization.Controllers
         public IActionResult Login([FromBody] LoginRequest request)
         {
             var result = _auth.Login(request);
-            return Ok(result);
+            if (result.isSucesss)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
 
         [HttpPost("assignRole")]

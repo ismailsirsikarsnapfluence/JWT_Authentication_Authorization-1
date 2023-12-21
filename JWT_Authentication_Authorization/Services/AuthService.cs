@@ -99,7 +99,14 @@ namespace JWT_Authentication_Authorization.Services
                 }
                 else
                 {
-                    throw new Exception("user is not valid");
+                    LoginResponse result = new LoginResponse
+                    {
+                        User = user,
+                        Token = null,
+                        isSucesss = false,
+                        
+                    };
+                    return result;
                 }
             }
             else
@@ -109,10 +116,7 @@ namespace JWT_Authentication_Authorization.Services
             
         }        
 
-        LoginResponse IAuthService.Login(LoginRequest loginRequest)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
       
